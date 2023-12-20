@@ -1,3 +1,7 @@
+![image](image/Particule1.jpg)
+![image](image/Particule2.jpg)
+![image](image/Particule3.jpg)
+
 # GrAPiC 
 
 ## Starting
