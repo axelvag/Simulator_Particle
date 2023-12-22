@@ -1,10 +1,10 @@
 # Simulator Particle
 
-Premierement j'ai creer une particule qui fonctionne seule (gravite, masse, collision):
+First I created a particle that works alone (gravity, mass, collision):
 
 ![image](image/Particule1.jpg)
 
-Puis fais des groupement de ces particules relie par des ressorts:
+Then make groups of these particles connected by springs:
 
 ![image](image/Particule2.jpg)
 ![image](image/Particule3.jpg)
@@ -12,128 +12,126 @@ Puis fais des groupement de ces particules relie par des ressorts:
 # Subject
 
 ```
-SEUL:
+PARTICLE ALONE:
 
-Nous allons noter pt la position au temps t, vt la vitesse au temps t et at l‘accélération au temps
-t. L’accélération est la variation de la vitesse. Soit dt un intervalle de temps, petit, par exemple
-10-3seconde (0.001 seconde). L’accélération est la variation de la vitesse :
+We will denote pt the position at time t, vt the speed at time t and at the acceleration at time
+t. Acceleration is the change in speed. Let dt be a small time interval, for example
+10-3seconds (0.001 seconds). Acceleration is the change in speed:
 
+dv(t)/dt = (v(t)-v(t-dt)) / dt = a(t)
 
-Nous pouvons faire de même pour la vitesse qui est la variation de position :
-t
-dttt v
-dt
-pp 
- 
+We can do the same for the speed which is the variation of position:
 
-1. Calculez la nouvelle position en fonction de la vitesse et de la position au pas de temps
-précédent.
+(p(t)-p(t-dt)) / dt = v(t) 
 
-2. Calculez la mise à jour de la vitesse en fonction de la vitesse au pas de temps précédent
-et de l’accélération.
+1. Calculate the new position based on the speed and position at the time step
+previous.
 
-3. A partir de ces deux expressions et du principe fondamental de la dynamique, calculez
-la position d’une particule en fonction des forces subies au temps t.
+2. Calculate the speed update based on the speed at the previous time step
+and acceleration.
 
-La position d’une particule se trouvant au point P peut s’écrire comme étant le vecteur OP, un
-vecteur à 2 dimensions dans le cas du plan que nous allons traiter ici. La vitesse de la particule
-est également un vecteur.
+3. From these two expressions and the fundamental principle of dynamics, calculate
+the position of a particle as a function of the forces experienced at time t.
 
-1. Écrivez en C++ la structure Vec2 qui stocke un vecteur à 2 dimensions. Vous pouvez
-reprendre la structure Complex et la renommer. Prenez également les opérateurs +, -, *,
-et /.
+The position of a particle at point P can be written as the vector OP, a
+2-dimensional vector in the case of the plane that we will deal with here. The speed of the particle
+is also a vector.
 
-2. Écrivez en C++ la structure Particle qui stocke les informations nécessaires à une
-simulation par le second principe de la dynamique (2e loi de Newton). Une particule est
-représentée par une position, une vitesse, une force et une masse. Si la particule subit
-plusieurs forces, les vecteurs forces seront sommés.
+1. Write in C++ the Vec2 structure which stores a 2-dimensional vector. You can
+take the Complex structure and rename it. Also take the operators +, -, *,
+And /.
 
-3. Écrivez la fonction partInit qui initialise une particule avec les paramètres suivants :
-une position p, une vitesse v, et une masse m.
+2. Write in C++ the Particle structure which stores the information necessary for a
+simulation by the second law of dynamics (Newton's 2nd law). A particle is
+represented by a position, a speed, a force and a mass. If the particle undergoes
+several forces, the force vectors will be summed.
 
-4. Écrivez la procédure void partAddForce(Particles& p, Vec2 force) qui ajoute une force
-à la particule p.
+3. Write the partInit function that initializes a particle with the following parameters:
+a position p, a speed v, and a mass m.
 
-5. Écrivez la procédure void partUpdatePV qui met à jour la vitesse et la position d’une
-particule.
+4. Write the procedure void partAddForce(Particles& p, Vec2 force) which adds a force
+to the particle p.
 
-6. Écrivez le programme principal simulant et affichant une particule.
-Remarque : il faut prévoir des forces, sinon la particule restera immobile.
+5. Write the void partUpdatePV procedure that updates the speed and position of a
+particle.
 
-7. Définissez la constante MAX_PART, ainsi que la structure World qui contient un
-ensemble de particules. La structure World contiendra un tableau de MAX_PART
-particules, ainsi que le nombre de particules réellement simulées dans le tableau.
+6. Write the main program simulating and displaying a particle.
+Note: forces must be provided, otherwise the particle will remain immobile.
 
-8. Écrivez la procédure init qui prend en paramètres un monde World et un nombre de
-particules à initialiser dans ce monde. Initialisez le vecteur vitesse des particules de
-manière à avoir une fontaine.
+7. Define the MAX_PART constant, as well as the World structure which contains a
+set of particles. The World structure will contain an array of MAX_PART
+particles, as well as the number of particles actually simulated in the table.
 
-Écrivez en même temps une fonction addParticle qui prend en paramètre un monde
-World, une particule et qui renvoie l’indice de la particule ajoutée dans le tableau.
+8. Write the init procedure which takes as parameters a world World and a number of
+particles to be initialized in this world. Initialize the particle velocity vector of
+way to have a fountain.
+
+At the same time write an addParticle function which takes a world as parameter
+World, a particle and which returns the index of the particle added in the table.
 
 void addParticle(World& w , Particle p)
 
-RESSORT:
+SPRING:
 
-Nous allons allez un peu plus loin avec la manipulation de particules en mouvement en
-connectant deux particules ensemble avec un ressort.
-La force de rappel élastique exercée par le ressort sur la masse m est
+We are going to go a little further with the manipulation of moving particles by
+connecting two particles together with a spring.
+The elastic restoring force exerted by the spring on the mass m is
 
 T = −k . Δl . er
 
-où:
+where:
 
-- er est un vecteur unitaire dirigé suivant l'axe du ressort, orienté vers l'extérieur.
+- is a unit vector directed along the axis of the spring, oriented outwards.
 
-- Δl=l−l0 est l'allongement du ressort en notant l la longueur du ressort, et l0 sa longueur à
-vide.
+- Δl=l−l0 is the elongation of the spring, noting l the length of the spring, and l0 its length at
+empty.
 
-- k est la raideur du ressort, intrinsèque au ressort considéré, elle caractérise la capacité du
-ressort à résister au mouvement de la masse m, et par conséquent à revenir à sa position
-d'équilibre
+- k is the stiffness of the spring, intrinsic to the spring considered, it characterizes the capacity of the
+spring to resist the movement of mass m, and consequently to return to its position
+balance
 
-1. Définissez une structure Spring (ressort) s’adossant à la structure World contenant
-l’ensemble des particules du monde. Vous pourrez utiliser l’indice d’une particule dans
-le tableau comme identifiant.
+1. Define a Spring structure based on the World structure containing
+all the particles in the world. You can use the index of a particle in
+the table as identifier.
 
-2. Ajoutez un tableau de ressorts à la structure du monde World.
+2. Add a spring array to the World structure.
 
-3. Modifiez la procédure init qui initialise le monde pour qu’elle créé également les
-ressorts. Nous vous conseillons d’écrire une structure addParticle qui renvoie l’indice
-de la particule ajoutée. Vous pourrez commencer par créer 2 particules reliées par un
-ressort, puis faire un triangle, puis un carré, etc.
-procedure addParticle(w : donnée/Resultat World)
+3. Modify the init procedure that initializes the world so that it also creates the
+springs. We advise you to write an addParticle structure that returns the index
+of the added particle. You can start by creating 2 particles connected by a
+spring, then make a triangle, then a square, etc.
+procedure addParticle(w: data/Result World)
 
-4. Modifiez la procédure draw pour qu’elle affiche les ressorts représentés par des lignes.
+4. Modify the draw procedure so that it displays springs represented by lines.
 
-5. Ecrivez la procédure computeParticleForceSpring qui calcule les forces qu’exercent les
-ressorts sur toutes les particules du monde.
+5. Write the procedure computeParticleForceSpring which calculates the forces exerted by the
+springs on all the particles in the world.
 
 COLLISION:
 
-Sur terre, une approximation de la force que subit une particule soumise à l’attraction terrestre
-est le poids, avec m la masse et G est la constante de gravitation universelle G=9.81 :
+On Earth, an approximation of the force experienced by a particle subjected to Earth's attraction
+is the weight, with m the mass and G is the universal gravitational constant G=9.81:
 P = m.G
 
-1. Ajoutez une structure World qui va stocker plusieurs particules dans un tableau. En
-complément de la structure, programmez une fonction init.
+1. Add a World structure that will store several particles in an array. In
+complement the structure, program an init function.
 
-2. Ajoutez à votre programme cette force de gravité pour que vos particules « tombent ».
-Pour la gestion des collisions nous allons considérer uniquement des murs horizontaux ou
-verticaux : x=0, y=0, x=Xmax , y=Ymax
+2. Add this force of gravity to your program so that your particles “fall”.
+For collision management we will only consider horizontal walls or
+vertical: x=0, y=0, x=Xmax, y=Ymax
 
-3. Modifiez le code de la fonction update pour intégrer ces collisions. Vous devriez obtenir
-des particules qui rebondissent dans la boite de l’écran. Le test de collision est assez
-simple : if (x<0) { … }
+3. Modify the update function code to include these collisions. You should get
+particles bouncing around in the screen box. The crash test is quite
+simple: if (x<0) { … }
 
-La réaction à une collision peut se faire en remettant artificiellement la particule dans le
-rectangle de la simulation : x = -x ;
+The reaction to a collision can be done by artificially putting the particle back into the
+simulation rectangle: x = -x;
 
-Il faut aussi réorienter le vecteur vitesse de manière symétrique : vx = -vx
+It is also necessary to reorient the speed vector symmetrically: vx = -vx
 
-4. Après un choc une particule perd un peu de vitesse (énergie) absorbée par le mur. Ceci
-se fait en réduisant le vecteur vitesse : v = -FRICTION * v où FRICTION est une
-constante inférieure à 1, par exemple 0.6.
+4. After a shock a particle loses a little speed (energy) absorbed by the wall. This
+is done by reducing the speed vector: v = -FRICTION * v where FRICTION is a
+constant less than 1, for example 0.6.
 
 ```
 
