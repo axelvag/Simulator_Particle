@@ -17,14 +17,8 @@ SEUL:
 Nous allons noter pt la position au temps t, vt la vitesse au temps t et at l‘accélération au temps
 t. L’accélération est la variation de la vitesse. Soit dt un intervalle de temps, petit, par exemple
 10-3seconde (0.001 seconde). L’accélération est la variation de la vitesse :
-t
-dtttt a
-dt
-vv
-dt
-dv 
-
- 
+
+
 Nous pouvons faire de même pour la vitesse qui est la variation de position :
 t
 dttt v
