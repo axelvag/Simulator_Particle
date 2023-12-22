@@ -135,6 +135,15 @@ constant less than 1, for example 0.6.
 
 ```
 
+# Starting
+
+Clone this repo
+```
+$ git clone https://github.com/axelvag/Simulator_Particle
+```
+
+- Install CodeBlocks (information at the bottom of this page)
+
 # GrAPiC 
 
 ## Starting
